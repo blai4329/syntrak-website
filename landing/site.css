@@ -561,6 +561,16 @@ body.hide-eyebrows .head-eyebrow { display: none; }
     gap: 36px;
   }
   #data-seq .seq-copy { text-align: left; }
+  /* Show all step body text on mobile — no scroll-driven hiding */
+  .seq-body {
+    max-height: 200px !important;
+    opacity: 1 !important;
+  }
+  .seq-item .seq-heading,
+  .seq-item .seq-num { color: rgba(255,255,255,.55) !important; }
+  .seq-item.active .seq-heading,
+  .seq-item.active .seq-num,
+  .seq-item.done .seq-heading { color: #fff !important; }
   .seq-phone {
     height: auto !important;
     padding: 0 !important;

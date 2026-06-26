@@ -25,32 +25,39 @@
   document.querySelectorAll("[data-icon]").forEach(function (el) { el.innerHTML = svg(el.getAttribute("data-icon")); });
   document.querySelectorAll("[data-icon-check]").forEach(function (el) { el.insertAdjacentHTML("afterbegin", svg("check")); });
 
-  /* ---------- scroll reveals (rect-based: robust in any context) ---------- */
+  /* ---------- scroll reveals — IntersectionObserver (reliable on iOS) ---------- */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
   if (reduce) {
     revealEls.forEach(function (el) { el.classList.add("in"); });
+  } else if ("IntersectionObserver" in window) {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
+    revealEls.forEach(function (el) { revealObs.observe(el); });
   } else {
+    // Fallback for very old browsers
     var checkReveals = function () {
       var vh = window.innerHeight || document.documentElement.clientHeight;
       for (var i = revealEls.length - 1; i >= 0; i--) {
-        var el = revealEls[i];
-        var r = el.getBoundingClientRect();
+        var r = revealEls[i].getBoundingClientRect();
         if (r.top < vh * 0.92 && r.bottom > 0) {
-          el.classList.add("in");
+          revealEls[i].classList.add("in");
           revealEls.splice(i, 1);
         }
       }
     };
     checkReveals();
     window.addEventListener("scroll", checkReveals, { passive: true });
-    window.addEventListener("resize", checkReveals);
     window.addEventListener("load", checkReveals);
-    // safety: ensure first paint reveals fire even before scroll/load events
-    requestAnimationFrame(checkReveals);
     setTimeout(checkReveals, 300);
   }
 
-  /* ---------- count-up stats ---------- */
+  /* ---------- count-up stats — IntersectionObserver ---------- */
   function animateCount(el) {
     var target = parseFloat(el.getAttribute("data-count"));
     var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
@@ -65,18 +72,30 @@
     }
     requestAnimationFrame(step);
   }
-  var counted = [];
-  document.querySelectorAll("[data-count]").forEach(function (el) { counted.push(el); });
-  function checkCounts() {
-    var vh = window.innerHeight || document.documentElement.clientHeight;
-    for (var i = counted.length - 1; i >= 0; i--) {
-      var r = counted[i].getBoundingClientRect();
-      if (r.top < vh * 0.85 && r.bottom > 0) { animateCount(counted[i]); counted.splice(i, 1); }
-    }
+  if ("IntersectionObserver" in window) {
+    var countObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll("[data-count]").forEach(function (el) { countObs.observe(el); });
+  } else {
+    var counted = [];
+    document.querySelectorAll("[data-count]").forEach(function (el) { counted.push(el); });
+    var checkCounts = function () {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = counted.length - 1; i >= 0; i--) {
+        var r = counted[i].getBoundingClientRect();
+        if (r.top < vh * 0.85 && r.bottom > 0) { animateCount(counted[i]); counted.splice(i, 1); }
+      }
+    };
+    checkCounts();
+    window.addEventListener("scroll", checkCounts, { passive: true });
+    window.addEventListener("load", checkCounts);
   }
-  checkCounts();
-  window.addEventListener("scroll", checkCounts, { passive: true });
-  window.addEventListener("load", checkCounts);
 
   /* ---------- nav: scrolled state + light/dark theme by section underneath ---------- */
   var nav = document.getElementById("nav");

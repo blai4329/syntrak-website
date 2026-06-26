@@ -25,9 +25,12 @@
   document.querySelectorAll("[data-icon]").forEach(function (el) { el.innerHTML = svg(el.getAttribute("data-icon")); });
   document.querySelectorAll("[data-icon-check]").forEach(function (el) { el.insertAdjacentHTML("afterbegin", svg("check")); });
 
-  /* ---------- scroll reveals — IntersectionObserver (reliable on iOS) ---------- */
+  /* ---------- scroll reveals ---------- */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-  if (reduce) {
+  var isMobileReveal = window.innerWidth < 768;
+
+  if (reduce || isMobileReveal) {
+    // On mobile: show everything immediately — no animation delays on iOS
     revealEls.forEach(function (el) { el.classList.add("in"); });
   } else if ("IntersectionObserver" in window) {
     var revealObs = new IntersectionObserver(function (entries) {
@@ -40,7 +43,6 @@
     }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
     revealEls.forEach(function (el) { revealObs.observe(el); });
   } else {
-    // Fallback for very old browsers
     var checkReveals = function () {
       var vh = window.innerHeight || document.documentElement.clientHeight;
       for (var i = revealEls.length - 1; i >= 0; i--) {
@@ -57,7 +59,7 @@
     setTimeout(checkReveals, 300);
   }
 
-  /* ---------- count-up stats — IntersectionObserver ---------- */
+  /* ---------- count-up stats ---------- */
   function animateCount(el) {
     var target = parseFloat(el.getAttribute("data-count"));
     var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
@@ -72,7 +74,15 @@
     }
     requestAnimationFrame(step);
   }
-  if ("IntersectionObserver" in window) {
+
+  if (isMobileReveal || reduce) {
+    // Show final values immediately on mobile
+    document.querySelectorAll("[data-count]").forEach(function (el) {
+      var target = parseFloat(el.getAttribute("data-count"));
+      var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
+      el.textContent = target.toFixed(dec);
+    });
+  } else if ("IntersectionObserver" in window) {
     var countObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {

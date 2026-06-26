@@ -550,6 +550,7 @@ body.hide-eyebrows .head-eyebrow { display: none; }
   }
 
   /* --- Data sequence --- */
+  .seq-phone { order: -1; }
   #data-seq .track { height: auto; }
   #data-seq .pin {
     position: static;

@@ -89,16 +89,15 @@
   window.addEventListener("scroll", updateNav, { passive: true });
   window.addEventListener("resize", updateNav);
 
-  /* ---------- hero parallax — thermal scrolls slower, recedes behind next section ---------- */
-  var heroCard = document.getElementById('hero-card');
-  if (heroCard && !reduce) {
+  /* ---------- hero video parallax ---------- */
+  var heroVideo = document.getElementById('hero-video');
+  if (heroVideo && !reduce) {
     var heroParallax = function() {
       var y = window.scrollY || window.pageYOffset || 0;
-      heroCard.style.transform = 'translateY(' + (y * 0.42).toFixed(1) + 'px)';
+      heroVideo.style.transform = 'translateY(' + (y * 0.3).toFixed(1) + 'px)';
     };
     heroParallax();
     window.addEventListener('scroll', heroParallax, { passive: true });
-    window.addEventListener('resize', heroParallax);
   }
 
   /* ---------- sticky edge-angle scroll sequence ---------- */

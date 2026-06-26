@@ -25,9 +25,13 @@
 
 <!-- ===================== HERO ===================== -->
 <header id="hero" data-nav="dark" data-screen-label="Hero">
-  <div class="hero-glow"></div>
+  <div class="hero-video-wrap">
+    <video id="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/Syntrak Hero.mov" type="video/mp4">
+    </video>
+    <div class="hero-vignette"></div>
+  </div>
   <div class="hero-sticky">
-    <canvas id="hero-beams" aria-hidden="true"></canvas>
     <div class="hero-text">
       <p class="hero-name head-eyebrow">Syntrak Base Layer · Gen 1</p>
       <h1 class="hero-title" style="font-size: clamp(2.4rem, 6.4vw, 4rem); padding: 16px 0px 4px; letter-spacing: clamp(-1px, -0.03em, -2px); line-height: 0.95; font-weight: 500; font-family: 'Inter Tight'">See Every Movement.<br><span style="color: #ffffff00">Master Every Run.</span></h1>
@@ -36,12 +40,6 @@
     <div class="hero-cta">
       <a href="#pricing" class="btn btn-primary" style="border-radius: 30px; gap: 10px">GET STARTED →</a>
     </div>
-    <div class="hero-card-wrap">
-      <div class="hero-card" id="hero-card">
-        <img src="assets/product/thermal.png" alt="Syntrak smart base layer with woven motion sensors" style="object-fit: cover; padding: 27px 0px 0px; width: 100%; max-width: 860px; height: auto">
-      </div>
-    </div>
-    <div class="hero-vignette"></div>
   </div>
 </header>
 

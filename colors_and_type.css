@@ -1,0 +1,206 @@
+/* ============================================================
+   SYNTRAK — Colours & Type
+   Single source of truth for brand tokens.
+   Import in any HTML:  <link rel="stylesheet" href="colors_and_type.css">
+   ============================================================ */
+
+/* ---- FONTS (self-hosted · no network dependency) ----
+   Inter Tight  → body / UI   (variable wght)
+   DM Mono      → labels, stats, pull-quotes — UPPERCASE, light
+   Nagel VF     → display headers — UPPERCASE only (commercial, variable wght)
+   All files live in fonts/ relative to this stylesheet. */
+@font-face {
+  font-family: 'Nagel VF';
+  src: url('fonts/NagelVF.otf') format('opentype');
+  font-weight: 300 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('fonts/InterTight-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('fonts/InterTight-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('fonts/DMMono-Light.ttf') format('truetype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('fonts/DMMono-LightItalic.ttf') format('truetype');
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('fonts/DMMono-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('fonts/DMMono-Italic.ttf') format('truetype');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('fonts/DMMono-Medium.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('fonts/DMMono-MediumItalic.ttf') format('truetype');
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+
+:root {
+  /* ===== PRIMARY · BLUES (depth system: dark → mid → lift) ===== */
+  --syntrak-blue:  #131840;  /* PMS 2768C  · logo, type, hardware, primary surfaces */
+  --blue-cobalt:   #2C4286;  /* PMS 7687C  · elevated UI surfaces, secondary backgrounds */
+  --slate-blue:    #5969AC;  /* PMS 7456C  · contrast, button fills, active UI elements */
+
+  /* ===== NEUTRALS ===== */
+  --charcoal:      #171A1D;  /* Neutral Black C · deepest ink, near-black surfaces */
+  --bright-white:  #F7F6F7;  /* 11-0601 TPG · primary light background */
+
+  /* ===== LIGHT PALETTE (contrast / light-mode) ===== */
+  --powder-blue:   #C1D7EB;  /* PMS 657C   · light backgrounds, fills */
+  --sand:          #F8ECD9;  /* Cloud Dancer 11-4201 · elevated surfaces, secondary bg */
+  --kinetic-gold:  #DAB26F;  /* PMS 4024C  · contrast, button fills, the one warm accent */
+
+  /* ===== TERTIARY (pop only — keep usage well below primary/secondary) ===== */
+  --go-green:      #8BC27A;  /* PMS 7489C  · success */
+  --halt-red:      #AF5154;  /* PMS 703C   · danger / stop */
+  --stone-grey:    #D9D9D7;  /* Cool Grey 1C · hairlines, muted fills */
+
+  /* ============================================================
+     SEMANTIC — LIGHT THEME (default · marketing, web, print)
+     Primaries ~70% of colour, secondaries ~30%. Accents sparingly.
+     ============================================================ */
+  --bg:            var(--bright-white); /* page base */
+  --surface:       #FFFFFF;             /* cards on the base */
+  --surface-2:     var(--sand);         /* elevated / secondary surface */
+  --surface-inset: var(--powder-blue);  /* wells, light fills */
+
+  --text:          var(--syntrak-blue); /* primary ink */
+  --text-muted:    var(--slate-blue);   /* secondary text */
+  --text-faint:    #8A92B0;             /* tertiary / captions (slate tinted) */
+  --text-on-dark:  var(--bright-white);
+
+  --stroke:        #DDE2EC;             /* default hairline */
+  --stroke-strong: var(--slate-blue);  /* emphasised border */
+
+  --primary:       var(--syntrak-blue); /* primary action fill */
+  --primary-text:  var(--bright-white); /* text on primary fill */
+  --primary-hover: #1B2255;            /* primary fill, hover (lighter step) */
+
+  --accent:        var(--kinetic-gold); /* the warm pop — used purposefully */
+  --accent-text:   var(--syntrak-blue); /* text on gold */
+
+  --success:       var(--go-green);
+  --danger:        var(--halt-red);
+
+  /* ===== TYPE FAMILIES ===== */
+  --font-display:  'Nagel VF', 'Inter Tight', system-ui, sans-serif; /* headers — UPPERCASE */
+  --font-body:     'Inter Tight', system-ui, -apple-system, sans-serif;        /* body / UI */
+  --font-mono:     'DM Mono', ui-monospace, 'SFMono-Regular', monospace;       /* labels, stats */
+
+  /* ===== TYPE SCALE (rem @ 16px root) ·  social ref in comments ===== */
+  --fs-display:  clamp(3rem, 7vw, 6.5rem);    /* TITLE ~150px social  · Nagel uppercase */
+  --fs-h1:       clamp(2.25rem, 4.5vw, 4rem); /* SUBHEAD ~95px        · Nagel uppercase */
+  --fs-h2:       clamp(1.75rem, 3vw, 2.75rem);
+  --fs-h3:       clamp(1.35rem, 2vw, 1.875rem);/* LARGE ~60px */
+  --fs-lg:       1.5rem;                       /* MEDIUM ~48px */
+  --fs-body:     1.0625rem;                     /* body — Inter Tight Light */
+  --fs-sm:       0.9375rem;                      /* SMALL ~36px (min recommended) */
+  --fs-label:    0.75rem;                        /* DM Mono uppercase labels (~21px social) */
+
+  /* ===== WEIGHTS (Inter Tight defaults to LIGHT per brand) ===== */
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* ===== RADII — restrained, hardware-precise ===== */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  /* ===== SPACING (4px base) ===== */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  /* ===== ELEVATION — soft, cool-tinted, low spread ===== */
+  --shadow-sm: 0 1px 2px rgba(19,24,64,.06), 0 1px 1px rgba(19,24,64,.04);
+  --shadow-md: 0 4px 16px rgba(19,24,64,.08), 0 1px 3px rgba(19,24,64,.05);
+  --shadow-lg: 0 18px 48px rgba(19,24,64,.14), 0 4px 12px rgba(19,24,64,.08);
+}
+
+/* ============================================================
+   SEMANTIC — DARK THEME (app / product UI — the native register)
+   Apply with  <html data-theme="dark">  or  <body data-theme="dark">
+   ============================================================ */
+[data-theme="dark"] {
+  --bg:            var(--syntrak-blue);
+  --surface:       #1A2050;             /* card on syntrak-blue */
+  --surface-2:     var(--blue-cobalt);  /* elevated surface */
+  --surface-inset: #0E1232;             /* wells, recessed */
+
+  --text:          var(--bright-white);
+  --text-muted:    var(--powder-blue);
+  --text-faint:    #7E8AB8;
+  --text-on-dark:  var(--bright-white);
+
+  --stroke:        rgba(193,215,235,.14);
+  --stroke-strong: var(--slate-blue);
+
+  --primary:       var(--slate-blue);   /* fills lift against the dark field */
+  --primary-text:  var(--bright-white);
+  --primary-hover: #6B7BBE;
+
+  --accent:        var(--kinetic-gold);
+  --accent-text:   var(--syntrak-blue);
+
+  --success:       var(--go-green);
+  --danger:        var(--halt-red);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.30);
+  --shadow-md: 0 6px 20px rgba(0,0,0,.35);
+  --shadow-lg: 0 22px 60px rgba(0,0,0,.45);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT DEFAULTS — optional helpers
+   ============================================================ */
+.syntrak-base { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: var(--fw-light); }
+
+.display, h1.display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
+  color: var(--text);
+}
+.h1 { font-family: var(--font-display); font-weight: var(--fw-medium); text-transform: uppercase; letter-spacing: 0; line-height: 1.02; font-size: var(--fs-h1); }
+.h2 { font-family: var(--font-display); font-weight: var(--fw-medium); text-transform: uppercase; line-height: 1.05; font-size: var(--fs-h2); }
+.h3 { font-family: var(--font-body); font-weight: var(--fw-semibold); line-height: 1.15; font-size: var(--fs-h3); }
+
+.body { font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-body); line-height: 1.55; color: var(--text); }
+.body-muted { color: var(--text-muted); }
+
+/* DM Mono label — uppercase, tracked-out. The brand's connective tissue. */
+.mono-label {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: var(--fs-label);
+  color: var(--text-muted);
+}
+.stat { font-family: var(--font-mono); font-weight: 300; font-variant-numeric: tabular-nums; }

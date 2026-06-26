@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syntrak — See Every Movement. Master Every Run.</title>
+<meta name="description" content="Syntrak turns your ski base layer into a precision motion-capture and AI coaching system. See every movement. Master every run.">
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="landing/site.css">
+</head>
+<body class="hide-eyebrows">
+
+<!-- ===================== NAV ===================== -->
+<nav id="nav">
+  <a href="#hero" aria-label="Syntrak home">
+    <img class="logo logo-light" src="assets/logo/syntrak-horizontal-white.png" alt="Syntrak">
+    <img class="logo logo-dark" src="assets/logo/syntrak-horizontal.png" alt="Syntrak">
+  </a>
+  <div class="links">
+    <a href="#performance" style="font-family: 'Inter Tight'">PERFORMANCE</a>
+    <a href="#data-seq" style="font-family: 'Inter Tight'">COACHING</a>
+    <a href="#pricing" class="btn navcta" style="border-radius: 30px">Pre-order</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header id="hero" data-nav="dark" data-screen-label="Hero">
+  <div class="hero-glow"></div>
+  <div class="hero-sticky">
+    <canvas id="hero-beams" aria-hidden="true"></canvas>
+    <div class="hero-text">
+      <p class="hero-name head-eyebrow">Syntrak Base Layer · Gen 1</p>
+      <h1 class="hero-title" style="font-size: clamp(2.4rem, 6.4vw, 4rem); padding: 16px 0px 4px; letter-spacing: clamp(-1px, -0.03em, -2px); line-height: 0.95; font-weight: 500; font-family: 'Inter Tight'">See Every Movement.<br><span style="color: #ffffff00">Master Every Run.</span></h1>
+      <p class="hero-sub" style="margin: 6px 0px 0px">AI-powered coaching, embedded in your thermal.*</p>
+    </div>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn btn-primary" style="border-radius: 30px; gap: 10px">GET STARTED →</a>
+    </div>
+    <div class="hero-card-wrap">
+      <div class="hero-card" id="hero-card">
+        <img src="assets/product/thermal.png" alt="Syntrak smart base layer with woven motion sensors" style="object-fit: cover; padding: 27px 0px 0px; width: 100%; max-width: 860px; height: auto">
+      </div>
+    </div>
+    <div class="hero-vignette"></div>
+  </div>
+</header>
+
+<!-- ===================== THERMAL REVEAL ===================== -->
+<section id="performance" class="thermal-hero" data-nav="dark" data-screen-label="Thermal reveal" style="background-color: rgb(5, 6, 15); padding: 122px 0px 8px">
+<style>
+.thermal-hero { background: #08090f; width: 100%; position: relative; padding: clamp(72px,10vw,130px) 0; box-sizing: border-box; }
+.thermal-hero .th-wrap { display: grid; grid-template-columns: 45fr 55fr; gap: clamp(40px,5vw,80px); align-items: center; width: min(1200px,88vw); margin: 0 auto; min-height: 80vh; }
+.thermal-hero .th-left { display: flex; flex-direction: column; justify-content: center; }
+.thermal-hero .th-headline { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: clamp(2.4rem,4.5vw,3.8rem); line-height: 1.04; letter-spacing: -0.03em; color: #F7F6F7; margin: 0 0 20px; }
+.thermal-hero .th-sub { font-weight: 300; font-size: clamp(.95rem,1.3vw,1.1rem); line-height: 1.6; color: rgba(193,215,235,.6); margin: 0 0 36px; max-width: 42ch; }
+.thermal-hero .th-features { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 22px; }
+.thermal-hero .th-features li { display: flex; gap: 16px; align-items: flex-start; }
+.thermal-hero .th-icon { flex-shrink: 0; width: 40px; height: 40px; border-radius: 11px; background: rgba(193,215,235,.08); border: 1px solid rgba(193,215,235,.12); display: grid; place-items: center; }
+.thermal-hero .th-icon svg { width: 18px; height: 18px; stroke: #C1D7EB; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.thermal-hero .th-features strong { display: block; font-weight: 600; font-size: .98rem; color: #F7F6F7; margin-bottom: 3px; font-family: 'Inter Tight', sans-serif; }
+.thermal-hero .th-features p { margin: 0; font-weight: 300; font-size: .9rem; color: rgba(193,215,235,.55); line-height: 1.5; }
+.thermal-hero .th-right { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+.thermal-hero .th-img-wrap { position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden; border-radius: 20px; cursor: none; }
+.thermal-hero .th-base, .thermal-hero .th-top { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; user-select: none; }
+.thermal-hero .th-top { -webkit-mask-image: radial-gradient(circle 0px at -9999px -9999px, transparent 0%, black 0%); mask-image: radial-gradient(circle 0px at -9999px -9999px, transparent 0%, black 0%); }
+.thermal-hero .th-cursor { position: absolute; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(60,200,255,.55); box-shadow: 0 0 14px rgba(60,200,255,.2), inset 0 0 8px rgba(60,200,255,.08); pointer-events: none; z-index: 10; transform: translate(-50%,-50%) scale(0); opacity: 0; transition: transform .2s ease, opacity .2s ease; }
+.thermal-hero .th-label { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .18em; font-size: 10.5px; color: rgba(193,215,235,.35); text-align: center; width: 100%; display: block; padding-top: 16px; }
+@media (max-width: 768px) {
+  .thermal-hero .th-wrap { grid-template-columns: 1fr; }
+  .thermal-hero .th-right { order: -1; }
+  .thermal-hero .th-top { display: none; }
+  .thermal-hero .th-img-wrap { cursor: auto; }
+}
+</style>
+  <div class="th-wrap">
+    <div class="th-left">
+      <h2 class="th-headline" style="font-weight: 500">Intelligence<br>woven in.</h2>
+      <p class="th-sub">From real-time cues to post-run analysis, all built into one smart thermal, with the power of AI.</p>
+      <ul class="th-features">
+        <li>
+          <span class="th-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M4.9 19.1a10 10 0 0 1 0-14.2M7.8 16.2a6 6 0 0 1 0-8.4m8.4 0a6 6 0 0 1 0 8.4m2.9 2.9a10 10 0 0 0 0-14.2"/></svg></span>
+          <div><strong>Sensors in the seams</strong><p>A full-body capture array, invisibly distributed across the garment.</p></div>
+        </li>
+        <li>
+          <span class="th-icon"><svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></span>
+          <div><strong>Thermal-grade comfort</strong><p>Performs as a premium thermal first. The technology disappears.</p></div>
+        </li>
+        <li>
+          <span class="th-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <div><strong>A full day on one charge</strong><p>Capture every run, top to bottom, without thinking about it.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="th-right">
+      <div class="th-img-wrap" id="th-img-wrap">
+        <img class="th-base" src="assets/product/thermal-tech2.png" alt="Syntrak thermal with sensor nodes" draggable="false">
+        <img class="th-top" id="th-top" src="assets/product/thermal-plain2.png" alt="" draggable="false">
+        <div class="th-cursor" id="th-cursor"></div>
+      </div>
+      <span class="th-label" style="padding: 0px; line-height: 1.45; font-weight: 600; color: rgba(255, 255, 255, 0.35)">HOVER TO REVEAL</span>
+    </div>
+  </div>
+<script>
+(function(){
+  var wrap = document.getElementById('th-img-wrap');
+  var top  = document.getElementById('th-top');
+  var cur  = document.getElementById('th-cursor');
+  if (!wrap || !top) return;
+  var R = 200;
+  function setMask(x, y) {
+    var r = Math.round(R), s1 = Math.round(R*.55), s2 = Math.round(R*.72), s3 = Math.round(R*.92);
+    var m = 'radial-gradient(circle '+r+'px at '+x+'px '+y+'px, transparent 0%, transparent '+s1+'px, rgba(0,0,0,.55) '+s2+'px, black '+s3+'px)';
+    top.style.webkitMaskImage = m; top.style.maskImage = m;
+    if (cur) { cur.style.left = x+'px'; cur.style.top = y+'px'; }
+  }
+  setMask(-9999, -9999);
+  wrap.addEventListener('mousemove', function(e) {
+    var b = wrap.getBoundingClientRect();
+    setMask(e.clientX - b.left, e.clientY - b.top);
+    if (cur) { cur.style.transform = 'translate(-50%,-50%) scale(1)'; cur.style.opacity = '1'; }
+  });
+  wrap.addEventListener('mouseleave', function() {
+    setMask(-9999, -9999);
+    if (cur) { cur.style.transform = 'translate(-50%,-50%) scale(0)'; cur.style.opacity = '0'; }
+  });
+})();
+</script>
+</section>
+
+<!-- ===================== DATA SEQUENCE (sticky, dark) ===================== -->
+<section id="data-seq" class="theme-dark" data-nav="dark" data-screen-label="Data sequence">
+  <div class="track">
+    <div class="pin" style="background-color: rgb(5, 6, 15)">
+      <div class="pin-inner">
+        <!-- left: Whoop-style numbered scroll list -->
+        <div class="seq-copy">
+          <h2 class="headline seq-title" style="font-weight: 500; letter-spacing: -0.03em; font-size: clamp(1.8rem, 4.5vw, 3.5rem)">Real-time coaching on every run.</h2>
+          <div class="seq-list">
+            <div class="seq-item active" data-step="0">
+              <div class="seq-row">
+                <span class="seq-num">01</span>
+                <h3 class="seq-heading">Every turn, measured.</h3>
+              </div>
+              <p class="seq-body">Syntrak captures joint trajectory, edge angle on
+each carve</p>
+            </div>
+            <div class="seq-item" data-step="1">
+              <div class="seq-row">
+                <span class="seq-num">02</span>
+                <h3 class="seq-heading">Against your target.</h3>
+              </div>
+              <p class="seq-body">Your line is mapped against the ideal for the pitch. The gap is where the run is won.</p>
+            </div>
+            <div class="seq-item" data-step="2">
+              <div class="seq-row">
+                <span class="seq-num">03</span>
+                <h3 class="seq-heading">Your data, turned into one instruction.</h3>
+              </div>
+              <p class="seq-body">No raw numbers. Live AI coaching gives one clear move, for each turn.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- right: viz card -->
+        <div class="seq-phone" style="line-height: 1.4; padding: 42px 0px 0px">
+          <div class="viz seq-viz">
+            <div class="viz-head">
+              <div class="viz-readout ro-big"><span id="ro-num">0</span><span class="ro-unit">°</span></div>
+              <div class="eyebrow" style="margin-left: 10px; color: var(--powder-blue); align-self: flex-end; padding-bottom: 4px; margin: 0px 0px 22px -4px">EDGE ANGLE</div>
+            </div>
+            <svg viewBox="0 0 480 170" preserveAspectRatio="none" aria-hidden="true">
+              <g stroke="rgba(193,215,235,.10)" stroke-width="1">
+                <line x1="0" y1="42" x2="480" y2="42"></line>
+                <line x1="0" y1="85" x2="480" y2="85"></line>
+                <line x1="0" y1="128" x2="480" y2="128"></line>
+              </g>
+              <path id="path-target" d="M0,112 C60,112 82,86 120,86 C158,86 180,112 240,112 C300,112 322,84 360,84 C398,84 420,112 480,112"
+                    fill="none" stroke="var(--kinetic-gold)" stroke-width="2.5" stroke-dasharray="5 6" opacity="0"></path>
+              <path id="path-you" d="M0,120 C60,120 82,60 120,60 C158,60 180,124 240,124 C300,124 322,44 360,44 C398,44 420,112 480,112"
+                    fill="none" stroke="var(--slate-blue)" stroke-width="3"></path>
+              <circle id="marker" r="5" fill="var(--bright-white)" cx="0" cy="120"></circle>
+            </svg>
+            <div class="legend">
+              <span><span class="key" style="background:var(--slate-blue)"></span>Your edge</span>
+              <span id="legend-target" style="opacity:0"><span class="key" style="background:var(--kinetic-gold)"></span>Average</span>
+            </div>
+            <div class="viz-directive">
+              <p class="coach-label">Coach</p>
+              <p class="coach-text" id="ro-dtext">Hold the edge longer through the fall line.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS (dark) ===================== -->
+<section class="section theme-darker" data-nav="dark" data-screen-label="Stats">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="text-align: center; color: var(--powder-blue); font-weight: 500">Measured, not estimated</p>
+    <div class="stat-grid" style="margin-top:48px">
+      <div class="stat reveal d1"><div class="num"><span data-count="16">12</span></div><div class="cap">Body sensors</div></div>
+      <div class="stat reveal d2"><div class="num"><span data-count="100">0</span><span class="suf">Hz</span></div><div class="cap">Capture rate</div></div>
+      <div class="stat reveal d3"><div class="num"><span data-count="0.18" data-decimals="2">0</span><span class="suf">s</span></div><div class="cap">Coach latency</div></div>
+      <div class="stat reveal d4"><div class="num"><span class="suf">+</span><span data-count="27">0</span><span class="suf">%</span></div><div class="cap">Avg. season gain</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMPARISON TABLE ===================== -->
+<section class="section theme-dark" data-nav="dark" data-screen-label="Comparison" style="padding: 169px 0px 9px">
+  <div class="wrap">
+    <p class="eyebrow head-eyebrow" style="text-align:center;color:var(--powder-blue);margin-bottom:14px">How we compare</p>
+    <h2 class="headline reveal" style="text-align: left; margin-bottom: 56px; font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 500">Why Syntrak?</h2>
+    <div class="compare-table reveal d1">
+      <div class="compare-head">
+        <div class="compare-cell compare-feat" style="color: rgba(255, 255, 255, 0.45); font-family: 'Inter Tight'">Feature</div>
+        <div class="compare-cell compare-us">Syntrak</div>
+        <div class="compare-cell">Competitors</div>
+        <div class="compare-cell" style="font-family: 'Inter Tight'">Private Coach</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-feat">Real-time coaching</div>
+        <div class="compare-cell compare-us" data-icon="check" style="background-color: rgba(89, 105, 172, 0)"></div>
+        <div class="compare-cell" data-icon="check"></div>
+        <div class="compare-cell" data-icon="x"></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-feat">Full-body motion capture</div>
+        <div class="compare-cell compare-us" data-icon="check" style="background-color: rgba(89, 105, 172, 0)"></div>
+        <div class="compare-cell" data-icon="x"></div>
+        <div class="compare-cell" data-icon="x"></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-feat">Wearable — no setup</div>
+        <div class="compare-cell compare-us" data-icon="check" style="background-color: rgba(255, 255, 255, 0)"></div>
+        <div class="compare-cell" data-icon="check"></div>
+        <div class="compare-cell" data-icon="x"></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-feat">Full-body analysis</div>
+        <div class="compare-cell compare-us" data-icon="check" style="background-color: rgba(89, 105, 172, 0)"></div>
+        <div class="compare-cell" data-icon="x"></div>
+        <div class="compare-cell" data-icon="x"></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-feat">Affordable at scale</div>
+        <div class="compare-cell compare-us" data-icon="check" style="background-color: rgba(89, 105, 172, 0)"></div>
+        <div class="compare-cell" data-icon="x"></div>
+        <div class="compare-cell" data-icon="x"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING (dark) ===================== -->
+<section id="pricing" class="section theme-dark" data-nav="dark" data-screen-label="Pricing">
+  <div class="wrap">
+    <div class="pricing-grid reveal">
+
+      <!-- Starter -->
+      <div class="plan-card" style="background-color: rgb(26, 31, 58)">
+        <div class="plan-top">
+          <h3 class="plan-name">Starter</h3>
+          <p class="plan-desc">Motion capture and post-session analysis. Understand your skiing like never before.</p>
+          <div class="plan-price">$349<span class="plan-per"> / season</span></div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Full-body motion capture</strong><p>16 sensors woven into the base layer.</p></div></li>
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Post-run edge analysis</strong><p>Detailed breakdown after every run.</p></div></li>
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Season progress tracking</strong><p>Watch your symmetry and edge angle improve.</p></div></li>
+        </ul>
+        <a href="#" class="plan-btn plan-btn-ghost">Pre-order &nbsp;→</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="plan-card plan-card--featured">
+        <div class="plan-top">
+          <h3 class="plan-name">Pro</h3>
+          <p class="plan-desc">Real-time AI coaching in your ear, every run. The full Syntrak experience.</p>
+          <div class="plan-price">$499<span class="plan-per"> / season</span></div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Everything in Starter</strong><p>Full capture suite included.</p></div></li>
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Live AI coaching</strong><p>One directive per turn, &lt;0.2s latency.</p></div></li>
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Adaptive lesson plans</strong><p>Goals that evolve with your progress.</p></div></li>
+        </ul>
+        <a href="#" class="plan-btn plan-btn-primary">Pre-order &nbsp;→</a>
+      </div>
+
+      <!-- Elite -->
+      <div class="plan-card" style="background-color: rgb(26, 31, 58)">
+        <div class="plan-top">
+          <h3 class="plan-name">Elite</h3>
+          <p class="plan-desc">For coaches and academies — full team dashboards and multi-athlete analysis.</p>
+          <div class="plan-price">$799<span class="plan-per"> / season</span></div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Everything in Pro</strong><p>Full AI coaching included.</p></div></li>
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Multi-athlete dashboard</strong><p>Compare and analyse up to 10 athletes.</p></div></li>
+          <li><span class="plan-check" data-icon="check"></span><div><strong>Coach portal &amp; exports</strong><p>PDF reports, CSV data, video sync.</p></div></li>
+        </ul>
+        <a href="#" class="plan-btn plan-btn-ghost">Book a meeting &nbsp;☎</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA (dark) ===================== -->
+<section id="final" class="section theme-dark" data-nav="dark" data-screen-label="Final CTA">
+  <div class="wrap-narrow">
+    <img class="logomark reveal" src="assets/logo/syntrak-logomark-white.png" alt="Syntrak">
+    <h2 class="display reveal d1">See Every Movement.</h2>
+    <div class="cta-row reveal d2" style="display:flex;gap:14px;justify-content:center;margin-top:40px;flex-wrap:wrap">
+      <a href="#pricing" class="btn btn-primary">PRE-ORDER</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer id="footer" data-nav="dark">
+  <div class="wrap">
+    <div class="frow">
+      <img src="assets/logo/syntrak-horizontal-white.png" alt="Syntrak">
+      <div class="flinks">
+        <a href="#performance" style="color: rgb(255, 255, 255); font-weight: 500">Technology</a>
+        <a href="#data-seq" style="color: rgb(255, 255, 255); font-weight: 500">COACHING</a>
+        <a href="#pricing" style="font-weight: 500; color: rgb(255, 255, 255)">Pricing</a>
+      </div>
+    </div>
+    <div class="legal">© 2026 Syntrak · See every movement. Master every run.</div>
+  </div>
+</footer>
+
+<script src="landing/site.js"></script>
+</body>
+</html>

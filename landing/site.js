@@ -181,6 +181,17 @@
     }
   }
 
+  /* ---------- contact form ---------- */
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var success = document.getElementById('contact-success');
+      if (success) { success.style.display = 'block'; }
+      contactForm.reset();
+    });
+  }
+
   /* ── hero beams canvas ─────────────────────────────────────── */
   (function () {
     var cvs = document.getElementById('hero-beams');

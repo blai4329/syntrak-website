@@ -319,7 +319,7 @@ each carve</p>
         <p class="contact-sub">Be first to know when Syntrak ships. We'll reach out with early access details and pre-order pricing.</p>
 
         <div class="contact-cards">
-          <div class="contact-card">
+          <a class="contact-card" href="mailto:general@syntrak.io" style="text-decoration:none;cursor:pointer">
             <span class="contact-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </span>
@@ -327,8 +327,8 @@ each carve</p>
               <p class="contact-card-label">Email</p>
               <p class="contact-card-value">general@syntrak.io</p>
             </div>
-          </div>
-          <div class="contact-card">
+          </a>
+          <div class="contact-card" id="phone-card" style="cursor:pointer" onclick="copyPhone()">
             <span class="contact-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.58 12 19.79 19.79 0 0 1 1.49 3.35 2 2 0 0 1 3.47 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 5.55 5.55l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </span>
@@ -337,6 +337,37 @@ each carve</p>
               <p class="contact-card-value">+852 9260 9187</p>
             </div>
           </div>
+
+          <!-- clipboard toast -->
+          <div id="copy-toast" style="
+            position:fixed; bottom:36px; left:50%; transform:translateX(-50%) translateY(6px);
+            display:flex; align-items:center; gap:7px;
+            font-family:'Inter Tight',sans-serif; font-size:.88rem; font-weight:500;
+            color:rgba(193,215,235,.9);
+            background:none; border:none; pointer-events:none;
+            opacity:0; transition:opacity .25s ease, transform .25s ease;
+            z-index:9999;
+          ">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Copied to clipboard
+          </div>
+          <script>
+            (function(){
+              var toastTimer;
+              window.copyPhone = function() {
+                navigator.clipboard.writeText('+852 9260 9187').then(function() {
+                  var t = document.getElementById('copy-toast');
+                  clearTimeout(toastTimer);
+                  t.style.opacity = '1';
+                  t.style.transform = 'translateX(-50%) translateY(0)';
+                  toastTimer = setTimeout(function() {
+                    t.style.opacity = '0';
+                    t.style.transform = 'translateX(-50%) translateY(6px)';
+                  }, 2000);
+                });
+              };
+            })();
+          </script>
         </div>
       </div>
 

@@ -200,16 +200,9 @@
     }
   }
 
-  /* ---------- contact form ---------- */
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var success = document.getElementById('contact-success');
-      if (success) { success.style.display = 'block'; }
-      contactForm.reset();
-    });
-  }
+  /* ---------- contact form (Formspree Ajax) ---------- */
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'xaqgbqrd' });
 
   /* ── hero beams canvas ─────────────────────────────────────── */
   (function () {

@@ -342,22 +342,27 @@ each carve</p>
 
       <!-- Right: form -->
       <div class="contact-form-wrap reveal d1">
+        <div data-fs-success style="display:none; color: var(--powder-blue); padding: 16px 0; font-size: .95rem">Thanks — we'll be in touch.</div>
+        <div data-fs-error style="display:none; color: #f87171; padding: 8px 0; font-size: .9rem"></div>
         <form class="contact-form" id="contact-form">
           <div class="contact-field">
-            <input class="contact-input" type="text" placeholder="Your Name" name="name" required>
+            <input class="contact-input" type="text" placeholder="Your Name" name="name" required data-fs-field>
+            <span data-fs-error="name" style="color:#f87171;font-size:.85rem"></span>
           </div>
           <div class="contact-field">
-            <input class="contact-input" type="email" placeholder="Email Address" name="email" required>
+            <input class="contact-input" type="email" placeholder="Email Address" name="email" required data-fs-field>
+            <span data-fs-error="email" style="color:#f87171;font-size:.85rem"></span>
           </div>
           <div class="contact-field">
-            <textarea class="contact-input contact-textarea" placeholder="Your Message" name="message" rows="4"></textarea>
+            <textarea class="contact-input contact-textarea" placeholder="Your Message" name="message" rows="4" data-fs-field></textarea>
+            <span data-fs-error="message" style="color:#f87171;font-size:.85rem"></span>
           </div>
-          <button type="submit" class="btn btn-primary contact-submit">
+          <button type="submit" class="btn btn-primary contact-submit" data-fs-submit-btn>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
             Join Waitlist
           </button>
-          <p class="contact-success" id="contact-success" style="display:none">Thanks — we'll be in touch.</p>
         </form>
+        <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
       </div>
 
     </div>
